@@ -1,0 +1,76 @@
+<app-result [value]="data.rebirthSim.result.cost.min | short"
+            icon="/assets/gold.webp"
+        key="Min Cost">
+</app-result>
+<app-result [value]="data.rebirthSim.result.cost.total / data.rebirthSim.result.times | short"
+            icon="/assets/gold.webp"
+            key="Avg Cost">
+</app-result>
+<app-result [value]="data.rebirthSim.result.cost.max | short"
+            icon="/assets/gold.webp"
+            key="Max Cost">
+</app-result>
+
+<app-result [value]="data.rebirthSim.result.seconds.min | number: '1.0-2'"
+            key="Min Seconds">
+</app-result>
+<app-result [value]="data.rebirthSim.result.seconds.total / data.rebirthSim.result.times | number: '1.0-2'"
+            key="Avg Seconds">
+</app-result>
+<app-result [value]="data.rebirthSim.result.seconds.max | number: '1.0-2'"
+            key="Max Seconds">
+</app-result>
+
+<app-result [value]="data.rebirthSim.result.hatches.min | number: '1.0-0'"
+            icon="/assets/common.webp"
+            key="Min Hatches">
+</app-result>
+<app-result [value]="data.rebirthSim.result.hatches.total / data.rebirthSim.result.times | number: '1.0-0'"
+            icon="/assets/common.webp"
+            key="Avg Hatches">
+</app-result>
+<app-result [value]="data.rebirthSim.result.hatches.max | number: '1.0-0'"
+            icon="/assets/common.webp"
+            key="Max Hatches">
+</app-result>
+
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Egg Breakdown</mat-panel-title>
+    <mat-panel-description>Statistics per egg type</mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div style="display: inline-flex;">
+    <div class="recommendations-div">
+      <table mat-table [dataSource]="data.rebirthSim.result.counts" class="mat-elevation-z8">
+        <ng-container matColumnDef="pet">
+          <th mat-header-cell *matHeaderCellDef> Rarity </th>
+          <td mat-cell *matCellDef="let element; index as i">
+            <mat-chip class="egg-chip bg-{{data.egg_name(i)}}">{{data.egg_name(i)}}</mat-chip>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="shinies-avg">
+          <th mat-header-cell *matHeaderCellDef> Average Shinies </th>
+          <td mat-cell style="text-align: right"
+              *matCellDef="let element"> {{1.0 * element.shinies / data.rebirthSim.result.times | number: '1.0-2'}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="shinies-total">
+          <th mat-header-cell style="text-align: center" *matHeaderCellDef> Total Shinies </th>
+          <td mat-cell style="text-align: right" *matCellDef="let element"> {{element.shinies | number: '1.0-0'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="mets-total">
+          <th mat-header-cell *matHeaderCellDef> Total Metallics </th>
+          <td mat-cell style="text-align: right" *matCellDef="let element"> {{element.metallics | number: '1.0-0'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="mets-avg">
+          <th mat-header-cell *matHeaderCellDef> Average Metallics </th>
+          <td mat-cell style="text-align: right"
+              *matCellDef="let element"> {{element.metallics / data.rebirthSim.result.times | number: '1.0-2'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</mat-expansion-panel>

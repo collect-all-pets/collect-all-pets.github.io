@@ -1,0 +1,51 @@
+a {
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+  padding: 20px;
+  background-color: var(--mdc-elevated-card-container-color, transparent);
+}
+
+mat-card {
+  padding: 10px 10px 30px 10px;
+}
+
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+.button-flex-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.bg-image {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+
+.bg-image-rebirth {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/rebirth.webp');
+}
+.bg-image-calculator {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/plus.webp');
+}
+.bg-image-damage {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/damage.webp');
+}
+.bg-image-metallic {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/met-luck.webp');
+}
+.bg-image-shiny {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/shiny-luck.webp');
+}
+.bg-image-gold {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/gold.webp');
+}
+.bg-image-ec {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%), url('/assets/ec-luck.webp');
+}

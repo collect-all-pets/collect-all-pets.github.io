@@ -1,0 +1,14 @@
+<mat-expansion-panel *ngIf="!data.stats.is_max_all_3() && data.stats.is_metallic_possible()"
+                     class="clear-card outer-card" expanded>
+<mat-expansion-panel-header>
+  Metallic Optimizers
+</mat-expansion-panel-header>
+  <mat-tab-group animationDuration="0ms" color="accent" class="outer-card results-tab-group">
+    <mat-tab label="Birdman's Metallic Optimizer ⃰">
+      <app-theb1rdm4n-recommends></app-theb1rdm4n-recommends>
+    </mat-tab>
+    <mat-tab label="Farzz's Metallic Optimizer ⃰">
+      <app-farzz-recommends></app-farzz-recommends>
+    </mat-tab>
+  </mat-tab-group>
+</mat-expansion-panel>

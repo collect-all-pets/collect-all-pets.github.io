@@ -1,0 +1,18 @@
+<mat-card class="result" (click)="showHelp()">
+  <mat-card-header class="result-header">
+    <mat-card-title class="result-value">
+      <span *ngIf="prefix1 != ''" class="result-prefix">{{prefix1}}</span>
+      <span class="result-value-text">{{value1}}</span>
+      <span *ngIf="suffix1 != ''" [class]="smallSuffix1 ? 'result-suffix-small' : 'result-suffix'">{{suffix1}}</span>
+      <img *ngIf="iconSuffix1 != ''" [class]="smallIconSuffix1 ? 'suffix-image-small' : 'suffix-image'" [src]="iconSuffix1" alt="" />
+      <br />
+      <span *ngIf="parenthesis2" class="result-value-text-2">(</span>
+      <span *ngIf="prefix2 != ''" class="result-prefix-2">{{prefix2}}</span>
+      <span class="result-value-text-2">{{value2}}</span>
+      <span *ngIf="suffix2 != ''" [class]="smallSuffix2 ? 'result-suffix-small-2' : 'result-suffix-2'">{{suffix2}}</span>
+      <span *ngIf="parenthesis2" class="result-value-text-2">)</span>
+      <img *ngIf="iconSuffix2 != ''" [class]="smallIconSuffix2 ? 'suffix-image-small' : 'suffix-image'" [src]="iconSuffix2" alt="" />
+    </mat-card-title>
+    <mat-card-subtitle class="result-key">{{key}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

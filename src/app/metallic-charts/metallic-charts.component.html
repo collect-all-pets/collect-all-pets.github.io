@@ -1,0 +1,36 @@
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Metallic Chances Over Time</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <canvas #chart width="505" height="400"></canvas>
+
+  <br/>
+  <mat-form-field *ngIf="!data.cfg.met_chart_use_days" subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Max Hours</mat-label>
+    <mat-select [(value)]="data.cfg.met_chart_hours" (valueChange)="data.calculatorEvents.emit()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(1, 999, 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}} hours
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="data.cfg.met_chart_use_days" subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Max Days</mat-label>
+    <mat-select [(value)]="data.cfg.met_chart_days" (valueChange)="data.calculatorEvents.emit()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(1, 999, 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}} days
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox class="cb-left" matTooltip="Check this box to switch to using days instead of hours"
+                [(ngModel)]="data.cfg.met_chart_use_days" (ngModelChange)="data.calculatorEvents.emit()">
+    Use Days
+  </mat-checkbox>
+
+  <app-help-button class="right-help" help="This chart shows your chances of getting at least 1 metallic pet of the specified
+  type over a period of time. The longer you hatch eggs for the higher your chances will be,
+  which is why the graph goes up. Click on a pet type to show/hide it from chart.
+  Click 'Use Days' or adjust the Max Hours/Days to get a broader view over time."></app-help-button>
+</mat-expansion-panel>
+

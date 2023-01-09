@@ -1,0 +1,20 @@
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Titanium Pets</mat-panel-title>
+    <mat-card-subtitle class="titanium-subtitle">How many titanium pets do you have?</mat-card-subtitle>
+  </mat-expansion-panel-header>
+  <mat-form-field *ngFor="let egg of data.all_eggs()" subscriptSizing="dynamic" color="accent" class="duration-field" appearance="fill">
+    <mat-label>{{data.egg_name(egg)}}</mat-label>
+    <mat-select [(value)]="data.stats.titanium_pets[egg]" (valueChange)="data.update_calc()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0, data.unique_count(egg), 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>{{data.egg_name(egg)}}</mat-hint>
+  </mat-form-field>
+  <br/>
+  <br/>
+  <mat-card-footer>
+    <span><i>This will be used to show your true metallic probabilities.</i></span>
+  </mat-card-footer>
+</mat-expansion-panel>

@@ -1,0 +1,48 @@
+<mat-expansion-panel style="max-width: 520px" class="form-card clear-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Exotic Crystal Luck</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-form-field label="Exotic Crystal Luck"
+                  help="<p>Enter the exact value you see in the Mountains for your exotic crystal luck percent.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Exotic Crystal Luck</mat-label>
+      <mat-select [(value)]="data.stats.ec_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 3, 0.1, 1)" [value]="num" class="justify-end">
+          {{num | number: '1.0-1'}}%
+        </mat-option>
+      </mat-select>
+      <mat-hint>Found in Mountains</mat-hint>
+    </mat-form-field>
+  </app-form-field>
+
+  <app-form-field label="Exotic Badge Luck"
+                  help="<p>Your current Exotic Luck multiplier based on your EC Badges.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Exotic Badge Luck</mat-label>
+      <mat-select [(value)]="data.stats.ec_badge_luck_pct" (valueChange)="data.update_calc()">
+        <mat-option *ngFor="let num of data.generate_nums(0, 1.0, 0.1, 1)" [value]="num">
+          +{{num | number: '1.0-1'}}%
+        </mat-option>
+      </mat-select>
+      <mat-hint>Achievement</mat-hint>
+    </mat-form-field>
+  </app-form-field>
+
+  <app-checkbox style="margin-right: 37px"
+                label="Magnetosphere"
+                shortHelp="Have you unlocked Magnetosphere in Mountains Cave?"
+                help="<p>Only select this if you have unlocked the Magnetosphere upgrade in the Mountains cave. This is the one that increases your EC luck based on your total metallic score divided by 100.</p>">
+    <mat-checkbox [(ngModel)]="data.stats.magnetosphere" (ngModelChange)="data.update_calc()">
+      Magnetosphere
+    </mat-checkbox>
+  </app-checkbox>
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field"
+                  *ngIf="data.stats.magnetosphere" appearance="fill">
+    <mat-label>Metallic Score</mat-label>
+    <input matInput class="right-align" type="number" step="1" min="1" max="100000000"
+           [(ngModel)]="data.stats.met_score" (ngModelChange)="data.update_calc()">
+    <mat-hint align="end">x{{1+(data.stats.met_score!/100.0)}} Luck</mat-hint>
+  </mat-form-field>
+
+</mat-expansion-panel>

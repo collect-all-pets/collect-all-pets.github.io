@@ -1,0 +1,32 @@
+<mat-accordion class="form-div" multi>
+  <app-shiny-luck></app-shiny-luck>
+
+  <app-xl-result key="Shiny Odds"
+              value="1 in {{data.calc.eggs_per_shiny() | number: '1.0-1'}}"
+              icon="/assets/shiny-luck.webp"
+              help="Odds that the next egg you hatch/generate/fuse will be shiny.<br/><br/>This is a constant value based on your combined luck.<br/><br/>1 in {{data.calc.eggs_per_shiny()}}"></app-xl-result>
+
+  <app-xl-result key="Hatches Required for a 90% Chance of receiving a Shiny Pet"
+                 value="{{data.stats.eggs_for_shiny_pct(90) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 90% probability that you will receive at least 1 Shiny Pet."></app-xl-result>
+
+  <app-xl-result key="Hatches Required for a 95% Chance of receiving a Shiny Pet"
+                 value="{{data.stats.eggs_for_shiny_pct(95) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 95% probability that you will receive at least 1 Shiny Pet."></app-xl-result>
+
+  <app-xl-result key="Hatches Required for a 99% Chance of receiving a Shiny Pet"
+                 value="{{data.stats.eggs_for_shiny_pct(99) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 99% probability that you will receive at least 1 Shiny Pet."></app-xl-result>
+
+<!--  <app-xl-result key="Hatches Required for a 1% Chance of receiving a Shiny Pet"-->
+<!--                 value="{{data.stats.eggs_for_shiny_pct(1) | number: '1.0-0'}}"-->
+<!--                 help="Approximately how many hatches it will take to ensure a 1% probability that you will receive at least 1 Shiny Pet."></app-xl-result>-->
+
+  <canvas #chart width="505" height="250"></canvas>
+
+  <app-save-buttons></app-save-buttons>
+
+  <mat-card-footer>
+    <span style="margin-left: 40px"><i>Note: See my <a routerLink="/calculator">Advanced Calculator</a> for a more detailed breakdown!</i></span>
+  </mat-card-footer>
+</mat-accordion>

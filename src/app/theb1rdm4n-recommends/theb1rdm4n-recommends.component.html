@@ -1,0 +1,62 @@
+<div class="clear-card">
+  <app-checkbox label="Birdman's Metallic Optimizer"
+                help="<p>My Algorithm for optimized metallic chances. Currently a work in progress. Written as an alternative to Farzz's algorithm,
+                and it integrates better with the additional hatching and generating options available.</p>
+                <br/>
+                <p>As always, this is just a recommendation and you are free to do things in any order you choose.</p>">
+    <mat-checkbox [(ngModel)]="data.cfg.enable_theb1rdm4n" style="display: inline-flex">
+      Enable Birdman's Metallic Optimizer ⃰
+    </mat-checkbox>
+  </app-checkbox>
+  <div *ngIf="data.cfg.enable_theb1rdm4n" style="display: inline-flex;">
+    <div class="recommendations-div">
+      <table mat-table [dataSource]="data.myRecommendations" class="mat-elevation-z8">
+        <ng-container matColumnDef="upgrade">
+          <th mat-header-cell *matHeaderCellDef> Upgrade</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-chip class="recommend-chip bg-{{data.upgrade_short_name(element.upgrade)}}">
+              <img class="upgrade-icon" [src]="data.get_upgrade_image(element.upgrade)" alt="" />
+              <span class="upgrade-name">{{data.upgrade_name(element.upgrade)}}</span>
+            </mat-chip>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell style="text-align: right" *matCellDef="let element"> {{element.valueStr()}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cost">
+          <th mat-header-cell *matHeaderCellDef> Cost </th>
+          <td mat-cell style="text-align: right" *matCellDef="let element"> {{element.cost | number: '1.0-0'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="chance">
+          <th mat-header-cell *matHeaderCellDef> Chance </th>
+          <td mat-cell style="text-align: right"
+              *matCellDef="let element"> {{element.chanceMetPct | number: '1.2-2'}}%
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="mets">
+          <th mat-header-cell *matHeaderCellDef> Metallics </th>
+          <td mat-cell style="text-align: right"
+              *matCellDef="let element"> {{element.metallics | number: '1.2-2'}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="hours">
+          <th mat-header-cell *matHeaderCellDef> Hours </th>
+          <td mat-cell style="text-align: right"
+              *matCellDef="let element"> {{element.hoursPerUpgrade | number: '1.2-2'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--<mat-card class="clear-card outer-card">-->
+<!--  <mat-card-header>-->
+
+<!--  </mat-card-header>-->
+<!--  <mat-card-content>-->
+
+<!--  </mat-card-content>-->
+<!--</mat-card>-->

@@ -1,0 +1,143 @@
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Results</mat-panel-title>
+    <mat-panel-description>Click a result to see more details</mat-panel-description>
+</mat-expansion-panel-header>
+
+  <div class="result-div">
+    <app-result key="Pet Score"
+                [value]="data.calc.mythicals() | number: '1.0-0'"
+                icon="/assets/paw.webp"
+                help="Total number of Mythical Pets you will receive, thus how much your total pet score will increase by. This is affected by Egg and Fuse Luck only, and does not include Calcification luck."></app-result>
+
+    <app-result key="Mythical Stones"
+                [value]="data.calc.stones() | number: '1.0-0'"
+                icon="/assets/stone.webp"
+                help="Total number of Mythical Stones you should expect. Basically this is the number of Mythical Pets * Calcification Luck."></app-result>
+
+    <app-result key="Total Cost"
+                [value]="data.calc.cost|short2"
+                [raw1]="data.calc.cost|number"
+                icon="/assets/gold_medium.webp"
+                suffixHtml="<img *ngIf=&quot;icon != ''&amp; style=&quot;margin-left: 5px; margin-top: 5px&quot; width=&amp;12%&quot; src=&quot;/assets/gold.webp />"
+                help="How much gold it will cost to generate and or hatch all of these eggs over the specified time period."></app-result>
+
+    <app-result key="Avg Cost Rate"
+                [value]="data.calc.cost/data.duration.total_seconds()|short2"
+                [raw1]="data.calc.cost/data.duration.total_seconds()|number"
+                rawSuffix1="/s"
+                icon="/assets/gold_small.webp"
+                suffix="/s"
+                help="Amount of Gold per second being used hatching and generating eggs"></app-result>
+
+    <app-result key="Seconds Per Stone"
+                [value]="data.duration.total_seconds()/data.calc.stones()|number:'1.0-2'"
+                icon="/assets/stone.webp"
+                suffix=" s"
+                help="On average, how many seconds will it take to generate 1 Mythical Stone."></app-result>
+
+    <app-result key="Total Chances"
+                [value]="data.calc.new_pets()|number:'1.0-0'"
+                icon="/assets/common.webp"
+                help="The total number of new pets either from hatching, generating, or fusing. This is the number used to calculate your probabilities and scores."></app-result>
+
+    <app-result key="Metallic Odds"
+                value="1 in {{data.calc.eggs_per_metallic() | short}}"
+                raw1="1 in {{data.calc.eggs_per_metallic() | number}}"
+                icon="/assets/chrome.webp"
+                help="Your odds that the next pet you hatch/generate/fuse will be a Metallic pet. Ranges from 1 in 10 million to 1 in 50 thousand.<br/><br/>This is a constant value based on your combined luck."></app-result>
+
+    <app-result key="Raw Met Chance"
+                [value]="data.calc.chance_of_metallic_pct() | number: '1.0-2'"
+                suffix="%"
+                icon="/assets/chrome.webp"
+                help="The percent chance you will get a metallic pet <i>within the selected time frame</i>.<br/>
+                    Keep in mind that each hatch/fuse is completely separate, so the odds of getting a metallic <i>do not increase linearly</i> with the total number of hatches, so this number cannot be added together!<br/>
+                    <br/>
+                    This applies the Probability of Independent Events 'At Least One' Rule. (<a class=&quot;link&quot; href=&quot;https://study.com/academy/lesson/the-at-least-one-rule-for-independent-events.html#:~:text=To%20calculate%20the%20probability%20of%20an%20event%20occurring%20at%20least,%2C%20or%20a%20100%25%20chance&quot; target=&quot;_blank&quot;>Concept</a>, <a class=&quot;link&quot; href=&quot;https://www.statology.org/probability-of-at-least-one-success/&quot; target=&quot;_blank&quot;>How to calculate</a>)
+                    <br/>
+                    <br/>
+                    <b>For example:</b><br/>
+                    If you have a 25% chance of getting a metallic in 1 day, you do <strong>not</strong> have a 50% chance of getting one over 2 days, and a 100% chance of getting 1 in 4 days.<br/>
+                    You actually have closer to a 44% chance over 2 days, and a 68% chance over 4 days!<br/>
+                    <br/>
+                    Think of it like this: The odds of flipping a coin and it landing on heads is 50%, however if you flip a coin twice, you are not guaranteed to get heads any of those times! This is because the odds reset back to 50% every time you flip it."></app-result>
+
+    <app-result key="Raw Metallics"
+                [value]="data.calc.metallics() | number: '1.0-2'"
+                [raw1]="data.calc.metallics()"
+                [icon]="data.get_metallic_icon()"
+                suffix=" ⃰"
+                help="This value is <b>NOT</b> adjusted for your titanium pets.<br/><br/>Total number of <b>estimated</b> metallic pets you will receive during the selected time period. Keep in mind, that a value over 1 will not guarantee a metallic pet!<br/><br/>
+                For values under 1, look at Adjusted Metallic Chance for a better representation."></app-result>
+
+    <app-result *ngIf="data.stats.has_titanium_pets()"
+                key="Adjusted Metallics"
+                [value]="data.calc.adj_metallics() | number: '1.0-2'"
+                [raw1]="data.calc.adj_metallics()"
+                suffix=" ⃰"
+                [icon]="data.get_adj_metallic_icon()"
+                help="Total number of <b>estimated</b> metallic pets you will receive during the selected time period. Keep in mind, that a value over 1 will not guarantee a metallic pet!<br/><br/>
+                For values under 1, look at Adjusted Metallic Chance for a better representation.<br/<br/>This value is adjusted for your titanium pets."></app-result>
+
+    <app-result *ngIf="data.stats.has_titanium_pets()"
+                key="Adj Metallic Chance"
+                value="{{data.calc.adj_chance_of_metallic_pct() | number: '1.0-2'}}"
+                suffix="%"
+                icon="/assets/chrome.webp"
+                help="Same as 'Raw Metallic Chance', but adjusted for your titanium pets. This field shows the true probability that you will receive a metallic pet during this time period."></app-result>
+
+    <app-result key="Shiny Odds"
+                value="1 in {{data.calc.eggs_per_shiny() | number: '1.0-1'}}"
+                icon="/assets/shiny.webp"
+                help="Odds that the next egg you hatch/generate/fuse will be shiny.<br/><br/>This is a constant value based on your combined luck."></app-result>
+
+    <app-result key="Shinies"
+                [value]="data.calc.shinies() | number: '1.0-0'"
+                icon="/assets/shiny.webp"
+                help="Approximate number of shiny skins you should get, rounded for the given period of time"></app-result>
+
+    <app-result key="Shiny Score"
+                [value]="data.calc.shiny_score() | number: '1.0-0'"
+                icon="/assets/shiny.webp"
+                help="Approximate increase in shiny score based on your hatch speed and egg types."></app-result>
+
+    <app-result key="Seconds Per Shiny"
+                [value]="data.duration.total_seconds()/data.calc.shinies()|number:'1.0-1'"
+                icon="/assets/shiny.webp"
+                suffix=" s"
+                help="On average, how many seconds will it take to get 1 new shiny pet."></app-result>
+
+    <app-result key="Gold Per Stone"
+                [value]="data.calc.cost_per_stone()|short2"
+                icon="/assets/stone.webp"
+                iconSuffix="/assets/gold.webp"
+                [smallIconSuffix]="true"
+                help="The average cost of a Mythical Stone based on your luck and the eggs you are hatching. This will vary wildly by egg type when your luck values are high."></app-result>
+
+    <app-result key="Gold Per Point"
+                [value]="data.calc.cost_per_shiny_point()|short"
+                icon="/assets/shiny.webp"
+                iconSuffix="/assets/gold.webp"
+                [smallIconSuffix]="true"
+                help="Average amount of gold required for each 1 shiny point. This will vary wildly by egg type when your luck values are high."></app-result>
+
+
+    <app-result key="Stones Per Billion"
+                [value]="data.calc.stones_per_billion() | number: '1.0-2'"
+                icon="/assets/stone.webp"
+                help="The average amount of Mythical Stones produced for every 1 Billion Gold based on your estimated Cost Per Stone. Formula is 1 Billion / Cost Per Stone.<br/><br/>
+                    Can be used in the estimation of how many stones a specific wall upgrade compares to. This varies wildly by the type of egg you are hatching and your current luck."></app-result>
+
+    <app-result key="Points Per Billion"
+                [value]="data.calc.shiny_score_per_billion() | number: '1.0-2'"
+                icon="/assets/shiny.webp"
+                help="Average amount of shiny points you should receive for each 1 Billion Gold spent. This will vary wildly by egg type when your luck values are high."></app-result>
+
+  </div>
+
+  <br/>
+  <mat-card-footer>
+    <span><i>Note: All values are based on the selected duration of {{data.duration.toString()}}.</i></span>
+  </mat-card-footer>
+</mat-expansion-panel>

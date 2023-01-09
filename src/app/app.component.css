@@ -1,0 +1,63 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.current-page {
+  display: inline !important;
+  font-size: large;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+  margin-top: 16px;
+  display: none;
+}
+
+.navbar-header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 4px 16px;
+}
+
+.navbar-header-item-selected {
+  background: rgba(0, 0, 0, .2);
+}
+
+.app-toolbar {
+  background-color: #444444;
+}
+
+.mat-mdc-button {
+  color: #fff !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  height: 56px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.menu-button {
+  margin-top: 10px;
+}
+
+.sidebar-content {
+  padding-top: 0;
+}
+
+mat-toolbar {
+  padding-left: 0 !important;
+}

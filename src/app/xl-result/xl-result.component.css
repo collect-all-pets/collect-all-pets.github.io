@@ -1,0 +1,74 @@
+.result {
+  display: inline-flex;
+  text-align: center;
+  /*width: 160px;*/
+  /*margin-right: 10px;*/
+  /*cursor: pointer;*/
+  width: 100%;
+}
+
+.result-header {
+  padding-top: 5px;
+  display: inline;
+  /*cursor: pointer;*/
+}
+
+.result-value {
+  text-align: center;
+  /*cursor: pointer;*/
+  font-size: x-large;
+}
+
+.result-value-text {
+
+}
+
+.result-key {
+  text-align: center;
+  padding-bottom: 5px;
+  /*cursor: pointer;*/
+  font-size: medium;
+}
+
+mat-card {
+  margin-bottom: 10px;
+  /*cursor: pointer;*/
+}
+
+.result-prefix {
+  font-size: large;
+}
+
+.result-suffix {
+  font-size: large;
+  /*font-size: medium;*/
+  /*margin-left: 2px;*/
+}
+
+.result-suffix-small {
+  font-size: medium;
+  /*margin-left: 0px;*/
+}
+
+.result-icon {
+  z-index: 999;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 44px;
+}
+
+.suffix-image {
+  margin-left: 5px;
+  height: 18px;
+}
+
+.suffix-image-small {
+  margin-left: 5px;
+  height: 14px;
+}
+
+.xl-result-help {
+  position: absolute;
+  top: 0;
+}

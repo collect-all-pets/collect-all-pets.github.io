@@ -1,0 +1,70 @@
+.suffix-image {
+  margin-left: 5px;
+  height: 18px;
+}
+
+.suffix-image-small {
+  margin-left: 5px;
+  height: 14px;
+}
+
+.result {
+  display: inline-flex;
+  text-align: center;
+  width: 160px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.result-header {
+  padding-top: 5px;
+  display: inline;
+  cursor: pointer;
+}
+
+.result-value {
+  text-align: center;
+  cursor: pointer;
+}
+
+.result-value-text {
+
+}
+
+.result-value-text-2 {
+  font-size: medium;
+}
+
+.result-key {
+  text-align: center;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+mat-card {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.result-suffix {
+}
+
+.result-suffix-small {
+  font-size: medium;
+}
+
+.result-suffix-2 {
+  font-size: medium;
+}
+
+.result-suffix-small-2 {
+  font-size: small;
+}
+
+.result-prefix {
+
+}
+
+.result-prefix-2 {
+  font-size: medium;
+}

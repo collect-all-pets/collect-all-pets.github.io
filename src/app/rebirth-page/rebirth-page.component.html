@@ -1,0 +1,15 @@
+<mat-accordion multi>
+
+  <app-egg-luck></app-egg-luck>
+  <app-metallic-luck></app-metallic-luck>
+  <app-shiny-luck></app-shiny-luck>
+
+  <mat-card class="clear-card outer-card rebirth-card">
+    <mat-card-content>
+      <app-rebirth></app-rebirth>
+    </mat-card-content>
+    <mat-card-content *ngIf="data.rebirthSim.isComplete">
+      <app-rebirth-results></app-rebirth-results>
+    </mat-card-content>
+  </mat-card>
+</mat-accordion>

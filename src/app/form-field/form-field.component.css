@@ -1,0 +1,24 @@
+.form-field {
+  display: inline-flex;
+}
+
+.field-help {
+  margin-left: -4px;
+  padding-top: 8px;
+}
+
+.field-icon {
+  z-index: 9999;
+  position: absolute;
+  top: 26px;
+  left: -10px;
+  height: 24px;
+}
+
+.regular-field {
+  width: 200px;
+}
+
+.header {
+  margin-bottom: 0;
+}

@@ -1,0 +1,42 @@
+<mat-expansion-panel class="form-card clear-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Shiny Luck</mat-panel-title>
+  </mat-expansion-panel-header>
+
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Shiny Wall Luck</mat-label>
+      <mat-select [(value)]="data.stats.shiny_wall_luck" (valueChange)="data.update_calc()">
+        <mat-option *ngFor="let num of data.generate_nums(1.0, 2.0, 0.01, 2)" [value]="num">
+          x{{num | number: '1.0-2'}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Found in the Grotto</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Shiny Badge Luck</mat-label>
+      <mat-select [(value)]="data.stats.shiny_badge_luck" (valueChange)="data.update_calc()">
+        <mat-option *ngFor="let num of data.generate_nums(1, 1.1, 0.01, 2)" [value]="num">
+          x{{num | number: '1.0-2'}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Achievement</mat-hint>
+    </mat-form-field>
+    <br/>
+
+    <app-checkbox style="margin-right: 26px"
+                  label="Expert Luck"
+                  shortHelp="Have you unlocked Expert Luck in Rebirth Cave?"
+                  help="<p>Only select this if you have unlocked the Expert Luck upgrade in the rebirth cave. This is the one that increases your shiny luck based on your total pet score divided by 10 million.</p>">
+      <mat-checkbox [(ngModel)]="data.stats.expert_luck" (ngModelChange)="data.update_calc()">
+        Expert Luck
+      </mat-checkbox>
+    </app-checkbox>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" *ngIf="data.stats.expert_luck" appearance="fill">
+      <mat-label>Pet Score</mat-label>
+      <input matInput class="right-align" type="number" step="1" min="1" max="100000000"
+             [(ngModel)]="data.stats.pet_score" (ngModelChange)="data.update_calc()">
+      <mat-hint align="start">{{data.stats.pet_score! | short}}</mat-hint>
+      <mat-hint align="end">x{{1+(data.stats.pet_score!/10000000.0) | number: '1.0-9'}} Luck</mat-hint>
+    </mat-form-field>
+</mat-expansion-panel>
