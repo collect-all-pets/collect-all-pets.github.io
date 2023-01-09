@@ -1,0 +1,34 @@
+<mat-accordion class="form-div" multi>
+  <app-metallic-luck></app-metallic-luck>
+<!--  <app-egg-luck [calcifyLuck]="false" [cheaperEggs]="false" title="Egg / Fuse Luck"></app-egg-luck>-->
+<!--  <app-generation></app-generation>-->
+<!--  <app-auto-hatch></app-auto-hatch>-->
+
+<app-xl-result key="Metallic Odds"
+            value="1 in {{data.calc.eggs_per_metallic() | number: '1.0-0'}}"
+            icon="/assets/met-luck.webp"
+            help="Your odds that the next pet you hatch/generate/fuse will be a Metallic pet. Ranges from 1 in 10 million to 1 in 50 thousand.<br/><br/>This is a constant value based on your combined luck.<br/>
+                  Keep in mind that each hatch/fuse is completely separate, so the odds of getting a metallic <i>do not increase linearly</i> with the total number of hatches"></app-xl-result>
+<br/>
+  <app-xl-result key="Hatches Required for a 90% Chance of receiving a Metallic Pet"
+                 value="{{data.stats.eggs_for_metallic_pct(90) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 90% probability that you will receive at least 1 Metallic Pet."></app-xl-result>
+
+  <app-xl-result key="Hatches Required for a 95% Chance of receiving a Metallic Pet"
+                 value="{{data.stats.eggs_for_metallic_pct(95) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 95% probability that you will receive at least 1 Metallic Pet."></app-xl-result>
+
+  <app-xl-result key="Hatches Required for a 99% Chance of receiving a Metallic Pet"
+                 value="{{data.stats.eggs_for_metallic_pct(99) | number: '1.0-0'}}"
+                 help="Approximately how many hatches it will take to ensure a 99% probability that you will receive at least 1 Metallic Pet."></app-xl-result>
+
+  <canvas #chart width="505" height="250"></canvas>
+
+  <app-save-buttons></app-save-buttons>
+
+<!--  <app-egg-breakdown *ngIf="data.hatch_info.is_enabled(data.stats)" [shinies]="false"></app-egg-breakdown>-->
+
+  <mat-card-footer>
+    <span style="margin-left: 40px"><i>Note: See my <a routerLink="/calculator">Advanced Calculator</a> for a more detailed breakdown!</i></span>
+  </mat-card-footer>
+</mat-accordion>

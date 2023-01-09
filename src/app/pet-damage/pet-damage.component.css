@@ -1,0 +1,12 @@
+.damage-field {
+  width: 135px;
+}
+
+.shiny-field {
+  width: 120px;
+}
+
+.damage-title {
+  position: absolute;
+  right: 20px;
+}

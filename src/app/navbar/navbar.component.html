@@ -1,0 +1,11 @@
+<mat-toolbar class="app-toolbar navbar-header">
+  <button mat-icon-button class="menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a mat-button *ngFor="let page of data.pages"
+     [routerLink]="page.route"
+     routerLinkActive="navbar-header-item-selected"
+     [routerLinkActiveOptions]="{exact:true}">
+    {{ page.name | uppercase }}
+  </a>
+</mat-toolbar>

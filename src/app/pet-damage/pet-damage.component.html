@@ -1,0 +1,90 @@
+<mat-accordion>
+<mat-expansion-panel style="margin-bottom: 10px" class="form-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Pet Damage
+      <app-help-button help="">
+      </app-help-button>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Wall Upgrade Damage Percent</mat-label>
+      <mat-select [(value)]="data.stats.wall_damage_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 300, 1, 0)" [value]="num" class="justify-end">
+          +{{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+      <!--          <input matInput class="right-align" type="number" step="1" min="0" max="25"-->
+      <!--                 [(ngModel)]="data.stats.egg_luck_pct" (ngModelChange)="data.update_calc()">-->
+      <!--          <span matTextSuffix>%</span>-->
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Badge Damage Percent</mat-label>
+      <!--          <img src="/assets/egg_luck.webp" class="field-icon" alt="">-->
+      <mat-select [(value)]="data.stats.badge_damage_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 50, 5, 0)" [value]="num" class="justify-end">
+          +{{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+      <!--          <input matInput class="right-align" type="number" step="1" min="0" max="10"-->
+      <!--                 [(ngModel)]="data.stats.egg_badge_luck_pct" (ngModelChange)="data.update_calc()">-->
+      <!--          <span matTextSuffix>%</span>-->
+    </mat-form-field>
+    <br/>
+
+  <app-checkbox class="cb-left"
+                shortHelp="Have you unlocked Polished Metal in the Grove?"
+                help="Have you unlocked Polished Metal in the Grove?">
+    <mat-checkbox [(ngModel)]="data.stats.polished_metal" (ngModelChange)="data.update_calc()">
+      Polished Metal
+    </mat-checkbox>
+  </app-checkbox>
+</mat-expansion-panel>
+
+  <app-xl-result key="Total Damage"
+                 value="{{data.pets.total_damage(data.stats) | number}}"
+                 icon="/assets/damage.webp"
+                 help="Total combined damage of your pets."></app-xl-result>
+
+  <app-save-buttons></app-save-buttons>
+</mat-accordion>
+
+<mat-accordion multi>
+<mat-expansion-panel *ngFor="let pet of data.pets.pets(); index as i" class="form-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span>Pet {{i+1}}</span>
+      <span class="damage-title"></span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <b>{{pet.total_damage(data.stats) | number}} Damage</b>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="damage-field" appearance="fill">
+    <mat-label>Pet Rarity</mat-label>
+    <mat-select [(value)]="pet.rarity" (valueChange)="data.update_calc()">
+      <mat-option [value]="null">-- None --</mat-option>
+      <mat-option *ngFor="let egg of data.all_eggs()" [value]="egg">
+        <mat-chip class="egg-chip bg-{{data.egg_name(egg)}}">{{data.egg_name(egg)}}</mat-chip>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="damage-field" appearance="fill">
+    <mat-label>Pet Type</mat-label>
+    <mat-select [(value)]="pet.type" (valueChange)="data.update_calc()">
+      <mat-option [value]="null">-- None --</mat-option>
+      <mat-option *ngFor="let type of data.pet_types()" [value]="type">{{data.type_name(type)}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic" *ngIf="data.stats.polished_metal && pet.type! >= chrome()" color="accent" class="shiny-field" appearance="fill">
+    <mat-label>Shiny Skins</mat-label>
+    <input matInput class="right-align" type="number" step="1" min="0" max="100000000"
+           [(ngModel)]="pet.skins" (ngModelChange)="data.update_calc()">
+  </mat-form-field>
+</mat-expansion-panel>
+
+  <app-save-buttons></app-save-buttons>
+</mat-accordion>

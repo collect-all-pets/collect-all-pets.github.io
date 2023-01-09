@@ -1,0 +1,18 @@
+<!--<mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">-->
+<!--  <mat-label>{{label}}</mat-label>-->
+<!--&lt;!&ndash;  <img *ngIf="icon != ''" [src]="icon" class="field-icon" alt="">&ndash;&gt;-->
+<!--&lt;!&ndash;  <mat-select [(value)]="value" class="justify-end">&ndash;&gt;-->
+<!--  <ng-content></ng-content>-->
+<!--  &lt;!&ndash; Placeholder control to fool mat-form-field &ndash;&gt;-->
+<!--  <ng-container *ngIf="beforeViewInit">-->
+<!--    <input matInput hidden />-->
+<!--  </ng-container>-->
+<!--&lt;!&ndash;  </mat-select>&ndash;&gt;-->
+<!--</mat-form-field>-->
+
+
+<!--<h3 class="header">{{label}} <app-help-button class="field-help" [help]="help"></app-help-button></h3>-->
+<div>
+  <ng-content></ng-content>
+  <app-help-button class="field-help" [shortHelp]="shortHelp" [title]="label" [help]="help"></app-help-button>
+</div>

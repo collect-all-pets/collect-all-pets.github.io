@@ -1,0 +1,46 @@
+<mat-expansion-panel *ngIf="data.stats.has_any_upgrades_left()" class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Upgrade Costs</mat-panel-title>
+    <mat-panel-description>Overview of your next upgrades</mat-panel-description>
+</mat-expansion-panel-header>
+
+  <div class="result-div">
+    <app-multi-result *ngIf="!data.stats.is_max_met_luck()"
+                      key="Metallic Luck"
+                      [value1]="data.stats.next_metallic_cost() | number: '1.0-0'"
+                      iconSuffix1="/assets/stone.webp"
+                      [smallSuffix1]=true
+                      [value2]="data.stats.next_metallic_cost() * (data.duration.total_seconds()/data.calc.stones())  / 3600 | number: '1.0-2'"
+                      suffix2=" hrs"
+                      [smallSuffix2]=true
+                      [parenthesis2]=true
+                      help="How many stones the next upgrade costs, and how many hours it will take with your current stats to gather enough stones to unlock this"></app-multi-result>
+    <app-multi-result *ngIf="!data.stats.is_max_calcify_luck()"
+                      key="Calcification Luck"
+                      [value1]="data.stats.next_calcify_cost() | number: '1.0-0'"
+                      iconSuffix1="/assets/stone.webp"
+                      [smallSuffix1]=true
+                      [value2]="data.stats.next_calcify_cost() * (data.duration.total_seconds()/data.calc.stones())  / 3600 | number: '1.0-2'"
+                      suffix2=" hrs"
+                      [smallSuffix2]=true
+                      [parenthesis2]=true
+                      help="How many stones the next upgrade costs, and how many hours it will take with your current stats to gather enough stones to unlock this"></app-multi-result>
+    <app-multi-result *ngIf="!data.stats.is_max_gen_spd()"
+                      key="Generation Speed"
+                      [value1]="data.stats.next_gen_speed_cost() | number: '1.0-0'"
+                      iconSuffix1="/assets/stone.webp"
+                      [smallSuffix1]=true
+                      [value2]="data.stats.next_gen_speed_cost() * (data.duration.total_seconds()/data.calc.stones())  / 3600 | number: '1.0-2'"
+                      suffix2=" hrs"
+                      [smallSuffix2]=true
+                      [parenthesis2]=true
+                      help="How many stones the next upgrade costs, and how many hours it will take with your current stats to gather enough stones to unlock this"></app-multi-result>
+
+    <app-result *ngIf="!data.stats.is_max_shiny()"
+                key="Shiny Luck Cost"
+                [value]="data.stats.next_shiny_luck_cost() | short"
+                iconSuffix="/assets/gold.webp"
+                [smallIconSuffix]="true"
+                help="How much gold the next shiny luck wall upgrade costs"></app-result>
+  </div>
+</mat-expansion-panel>

@@ -1,0 +1,42 @@
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Duration To Estimate</mat-panel-title>
+    <mat-card-subtitle></mat-card-subtitle>
+</mat-expansion-panel-header>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="duration-field" appearance="fill">
+      <mat-label>Days</mat-label>
+                <mat-select *ngIf="useSelect" [(value)]="data.duration.days" (valueChange)="data.update_calc()" class="justify-end">
+                  <mat-option *ngFor="let num of data.generate_nums(0, 999, 1, 0)" [value]="num" class="justify-end">
+                    {{num | number: '1.0-0'}}
+                  </mat-option>
+                </mat-select>
+      <input *ngIf="!useSelect" matInput class="right-align" type="number" step="1" min="0" max="999"
+             [(ngModel)]="data.duration.days" (ngModelChange)="data.update_calc()">
+    </mat-form-field>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="duration-field" appearance="fill">
+      <mat-label>Hours</mat-label>
+      <mat-select *ngIf="useSelect" [(value)]="data.duration.hours" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 999, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}
+        </mat-option>
+      </mat-select>
+      <input *ngIf="!useSelect" matInput class="right-align" type="number" step="1" min="0" max="999"
+             [(ngModel)]="data.duration.hours" (ngModelChange)="data.update_calc()">
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="duration-field" appearance="fill">
+      <mat-label>Minutes</mat-label>
+      <mat-select *ngIf="useSelect" [(value)]="data.duration.minutes" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 999, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}
+        </mat-option>
+      </mat-select>
+      <input *ngIf="!useSelect" matInput class="right-align" type="number" step="1" min="0" max="999"
+             [(ngModel)]="data.duration.minutes" (ngModelChange)="data.update_calc()">
+    </mat-form-field>
+
+  <br/>
+  <mat-card-footer>
+    <span><i>Note: All values are cumulative.</i></span>
+  </mat-card-footer>
+</mat-expansion-panel>

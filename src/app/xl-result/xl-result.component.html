@@ -1,0 +1,14 @@
+<mat-card class="result">
+  <mat-card-header class="result-header">
+    <mat-card-title class="result-value">
+      <img *ngIf="icon != ''" class="result-icon" [src]="icon" alt="" />
+      <span *ngIf="prefix != ''" class="result-prefix">{{prefix}}</span>
+      <span class="result-value-text" [innerHTML]="value"></span>
+      <span *ngIf="suffix != ''" [class]="smallSuffix ? 'result-suffix-small' : 'result-suffix'">{{suffix}}</span>
+      <span *ngIf="suffixHtml != ''" [class]="smallSuffix ? 'result-suffix-small' : 'result-suffix'" [innerHTML]="suffixHtml"></span>
+      <img *ngIf="iconSuffix != ''" [class]="smallIconSuffix ? 'suffix-image-small' : 'suffix-image'" [src]="iconSuffix" alt="" />
+      <app-help-button class="xl-result-help" [title]="key" [help]="help"></app-help-button>
+    </mat-card-title>
+    <mat-card-subtitle class="result-key">{{key}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

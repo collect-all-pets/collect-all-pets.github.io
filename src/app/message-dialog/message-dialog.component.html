@@ -1,0 +1,11 @@
+<h1 *ngIf="data.title != ''" mat-dialog-title [innerHTML]="data.title"></h1>
+<div [innerHTML]="data.content" mat-dialog-content>
+</div>
+<div *ngIf="data.raw1 != null || data.raw2 != null" mat-dialog-content>
+  <span *ngIf="data.raw1 != null">{{data.raw1}}{{data.rawSuffix1!}}</span>
+  <br/>
+  <span *ngIf="data.raw2 != null">{{data.raw2}}{{data.rawSuffix2!}}</span>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close="true">Close</button>
+</mat-dialog-actions>

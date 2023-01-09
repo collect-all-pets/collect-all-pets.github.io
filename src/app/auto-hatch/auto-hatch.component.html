@@ -1,0 +1,84 @@
+<mat-expansion-panel class="form-card clear-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Auto Hatch</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <mat-checkbox class="cb-left" matTooltip="Check this box if you plan on auto hatching eggs"
+                [(ngModel)]="data.hatch_info.should_hatch" (ngModelChange)="data.update_calc()">
+    Auto Hatch Eggs
+  </mat-checkbox>
+
+  <app-form-field *ngIf="data.hatch_info.should_hatch"
+                  label="Percent Active"
+                  shortHelp="The percentage of the time that you will be auto hatching eggs"
+                  help="The percentage of the time that you will be auto hatching eggs. Select 100% if you will be hatching them all the time, taking no breaks,
+        or select a lower percentage if you stop to do quests and such at times.">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Percent Active</mat-label>
+      <mat-select [(value)]="data.hatch_info.hatch_duty_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 100, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </app-form-field>
+
+  <br *ngIf="data.hatch_info.should_hatch" />
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" *ngIf="data.hatch_info.should_hatch" appearance="fill">
+    <mat-label>Auto Hatch Egg</mat-label>
+    <mat-select [(value)]="data.hatch_info.hatch_egg" (valueChange)="data.update_calc()">
+      <mat-option *ngFor="let egg of data.hatchable()" [value]="egg">
+        <mat-chip class="egg-chip bg-{{data.egg_name(egg)}}">{{data.egg_name(egg)}}</mat-chip>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-form-field *ngIf="data.hatch_info.should_hatch"
+                  label="Auto Hatch Speed"
+                  help="<p>Enter your approximate eggs per second you can auto hatch at. The easiest way to determine this is to start auto hatching and start a stopwatch.
+        After a predetermined number of hatches (say 10 or 50), stop the stopwatch. Then divide hatches / seconds. This will give you the approximate value to put in here.</p>
+        <p>Maxed out egg hatch speedup (500%) is about 0.9 egg/s. If you are using an auto-clicker and spamming continue button, this could go up to 1.1 eggs/s.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Auto Hatch Speed</mat-label>
+      <input matInput class="right-align" type="number" step="0.01" min="0.1" max="2.0"
+             [(ngModel)]="data.stats.auto_hatch_speed" (ngModelChange)="data.update_calc()">
+      <span matTextSuffix>/s</span>
+      <mat-hint>See help icon for info</mat-hint>
+    </mat-form-field>
+  </app-form-field>
+  <br/>
+  <app-checkbox *ngIf="data.hatch_info.should_hatch"
+                label="Hatch Alternate Eggs"
+                help="<p>Check this box if you wish to allocate a percentage of your time hatching an alternate egg. Whatever time is allocated to this alternate egg is taken away
+        from your primary egg. This is useful if you make too much for one egg type, but not enough for the other type full time.</p>">
+    <mat-checkbox [(ngModel)]="data.hatch_info.should_hatch2" (ngModelChange)="data.update_calc()">Auto
+      Hatch Alternate Eggs
+    </mat-checkbox>
+  </app-checkbox>
+
+  <br/>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" *ngIf="data.hatch_info.should_hatch2 && data.hatch_info.should_hatch" appearance="fill">
+    <mat-label>Alternate Egg</mat-label>
+    <mat-select [(value)]="data.hatch_info.hatch_egg2" (valueChange)="data.update_calc()">
+      <mat-option *ngFor="let egg of data.hatchable()" [value]="egg">
+        <mat-chip class="egg-chip bg-{{data.egg_name(egg)}}">{{data.egg_name(egg)}}</mat-chip>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-form-field *ngIf="data.hatch_info.should_hatch2 && data.hatch_info.should_hatch"
+                  label="Percentage Split"
+                  help="<p>Percentage of time you will be hatching this alternate egg. The primary egg will be hatched the rest of the time (100 - this number).
+                      50 means you will be hatching this egg half the time, and 10 means you will be hatching this egg 10 percent of the time, and 90 percent of the time the primary egg.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Percentage Split</mat-label>
+      <mat-select [(value)]="data.hatch_info.hatch2_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 100, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </app-form-field>
+
+</mat-expansion-panel>

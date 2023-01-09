@@ -1,0 +1,10 @@
+<mat-accordion>
+  <app-exotic-luck></app-exotic-luck>
+
+  <app-xl-result key="Exotic Crystal Luck"
+                 value="{{data.stats.ec_luck() | percent: '1.0-2'}}"
+                 icon="/assets/ec-luck.webp"
+                 help="Your combined Exotic Crystal Luck"></app-xl-result>
+
+  <app-save-buttons></app-save-buttons>
+</mat-accordion>

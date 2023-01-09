@@ -1,0 +1,55 @@
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>Rebirth Simulation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Discovery Luck</mat-label>
+      <mat-select [(value)]="data.stats.discovery_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 25, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+      <mat-hint>Rebirth Cave</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Bonus Discovery Luck</mat-label>
+      <mat-select [(value)]="data.stats.extra_discovery_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 25, 1, 0)" [value]="num" class="justify-end">
+          {{num | number: '1.0-0'}}%
+        </mat-option>
+      </mat-select>
+      <mat-hint>10,000 Stones Each</mat-hint>
+    </mat-form-field>
+    <br/>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Stop Egg</mat-label>
+      <mat-select [(value)]="data.rebirthSim.stopEgg">
+        <mat-option *ngFor="let egg of data.hatchable()" [value]="egg">
+          <mat-chip class="egg-chip bg-{{data.egg_name(egg)}}">{{data.egg_name(egg)}}</mat-chip>
+        </mat-option>
+      </mat-select>
+      <mat-hint>Highest egg to generate</mat-hint>
+    </mat-form-field>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Generation Speed</mat-label>
+      <mat-select [(value)]="data.stats.gen_spd" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0.25, 5.0, 0.01, 2)" [value]="num" class="justify-end">
+          {{num | number: '1.0-2'}}/s
+        </mat-option>
+      </mat-select>
+      <mat-hint>Automation Station</mat-hint>
+    </mat-form-field>
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Simulation Runs</mat-label>
+      <input matInput class="right-align" type="number" step="100" min="1" max="10000"
+             [(ngModel)]="data.rebirthSim.times">
+      <mat-hint>How many rebirths to simulate?</mat-hint>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <mat-progress-spinner *ngIf="data.rebirthSim.isRunning" mode="indeterminate" style="height: 24px; margin-top: -8px; margin-right: -8px"></mat-progress-spinner>
+    <button mat-flat-button color="primary" class="action-button" [disabled]="data.rebirthSim.times > 10000 && !data.rebirthSim.isRunning" (click)="simulate()">Simulate Rebirth</button>
+  </mat-card-actions>
+</mat-card>

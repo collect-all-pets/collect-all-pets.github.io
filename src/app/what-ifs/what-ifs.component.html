@@ -1,0 +1,215 @@
+<mat-expansion-panel class="clear-card outer-card">
+  <mat-expansion-panel-header>
+    <mat-panel-title>What Ifs</mat-panel-title>
+    <mat-panel-description>Compare certain upgrade benefits</mat-panel-description>
+</mat-expansion-panel-header>
+
+<mat-card class="clear-card" *ngIf="data.stats.calcify_luck_pct != null && !data.stats.is_max_calcify_luck()">
+    <mat-card-title>Calcify Luck</mat-card-title>
+    <mat-card-content>
+  <mat-form-field subscriptSizing="dynamic" color="accent" appearance="fill">
+    <mat-label>Calcify Luck Increase</mat-label>
+    <mat-select [(value)]="data.calcifyUpgrade.increase" (valueChange)="data.calcifyUpgrade.recalculate()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(1, 100-data.stats.calcify_luck_pct!, 1, 0)" [value]="num" class="justify-end">
+        + {{num | number: '1.0-0'}}%
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+      <br/>
+  <app-multi-result key="Upgrade Cost"
+              [value1]="data.calcifyUpgrade.cost() | number: '1.0-0'"
+              [value2]="data.calcifyUpgrade.upgrade_duration.total_hours() | number: '1.0-2'"
+              suffix2=" hrs"
+              [smallSuffix2]=true
+              [parenthesis2]=true
+              iconSuffix1="/assets/stone.webp"
+              help="Cost to upgrade the calcify luck by desired amount, and the hours it will take to obtain"></app-multi-result>
+  <app-multi-result key="Extra Stones"
+                    prefix1="+ "
+                    prefix2="+ "
+                    [parenthesis2]="true"
+                    [value1]="data.calcifyUpgrade.extra_stones() | number: '1.0-2'"
+                    iconSuffix1="/assets/stone.webp"
+                    [value2]="data.calcifyUpgrade.extra_stones_pct() | percent: '1.0-2'"
+                    help="Estimated amount of extra stones you will receive based on current egg types"></app-multi-result>
+    <app-multi-result key="Recuperate Stones"
+                      [value1]="data.calcifyUpgrade.days_to_recuperate() | number: '1.0-2'"
+                      suffix1=" days"
+                      help="How many days it will take for the extra stones produced to pay off the initial upgrade cost investment."></app-multi-result>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="clear-card" *ngIf="data.stats.gen_spd != null && !data.stats.is_max_gen_spd()">
+  <mat-card-title>Gen Speed</mat-card-title>
+  <mat-card-content>
+  <mat-form-field subscriptSizing="dynamic" color="accent" appearance="fill">
+    <mat-label>Gen Speed Increase</mat-label>
+    <mat-select [(value)]="data.genUpgrade.increase" (valueChange)="data.genUpgrade.recalculate()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0.01, 5.0 - data.stats.gen_spd!, 0.01, 2)" [value]="num" class="justify-end">
+        + {{num | number: '1.0-2'}}/s
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <br/>
+  <app-multi-result key="Upgrade Cost"
+              [value1]="data.genUpgrade.cost() | number: '1.0-0'"
+              [value2]="data.genUpgrade.cost() * (data.duration.total_seconds()/data.calc.stones())  / 3600 | number: '1.0-2'"
+              suffix2=" hrs"
+              [smallSuffix2]=true
+              [parenthesis2]=true
+              iconSuffix1="/assets/stone.webp"
+              help="Cost to upgrade the gen speed by desired amount, and the time required to get them"></app-multi-result>
+
+  <app-multi-result key="Extra Stones"
+                    prefix1="+ "
+                    prefix2="+ "
+                    [parenthesis2]="true"
+                    [value1]="data.genUpgrade.extra_stones() | number: '1.0-2'"
+                    iconSuffix1="/assets/stone.webp"
+                    [value2]="data.genUpgrade.extra_stones_pct() | percent: '1.0-2'"
+                    help="Estimated amount of extra stones you will receive during the same time period based on current egg types"></app-multi-result>
+  <app-multi-result key="Extra Pet Score"
+                    prefix1="+ "
+                    prefix2="+ "
+                    [parenthesis2]="true"
+                    [value1]="data.genUpgrade.extra_mythicals() | number: '1.0-2'"
+                    iconSuffix1="/assets/paw.webp"
+                    [value2]="data.genUpgrade.extra_mythicals_pct() | percent: '1.0-2'"
+                    help="Estimated amount of extra pet score / Mythical pets you will receive during the same time period based on current egg types"></app-multi-result>
+  <app-multi-result key="Extra Shiny Points"
+                    prefix1="+ "
+                    [value1]="data.genUpgrade.extra_shiny_points() | number: '1.0-2'"
+                    iconSuffix1="/assets/shiny.webp"
+                    help="Estimated amount of extra shiny points you will receive during the same time period based on current egg types"></app-multi-result>
+    <app-multi-result key="Extra Shiny Skins"
+                      prefix1="+ "
+                      [value1]="data.genUpgrade.extra_shiny_skins() | number: '1.0-2'"
+                      iconSuffix1="/assets/shiny.webp"
+                      help="Estimated amount of extra shiny points you will receive based on current egg types"></app-multi-result>
+    <app-multi-result key="Extra Metallics"
+                      prefix1="+ "
+                      [value1]="data.genUpgrade.extra_metallics() | number: '1.0-4'"
+                      iconSuffix1="/assets/chrome.webp"
+                      help="Estimated amount of extra metallics you will receive during the same time period based on current egg types"></app-multi-result>
+    <app-multi-result *ngIf="data.stats.has_titanium_pets()"
+                      key="Adj Extra Metallics"
+                      prefix1="+ "
+                      [value1]="data.genUpgrade.extra_adj_metallics() | number: '1.0-4'"
+                      iconSuffix1="/assets/chrome.webp"
+                      help="Estimated amount of adjusted extra metallics you will receive based on current egg types"></app-multi-result>
+    <app-multi-result key="Extra Cost Rate"
+                prefix1="+ "
+                [value1]="data.genUpgrade.extra_cost_rate()|short2"
+                iconSuffix1="/assets/gold_small.webp"
+                suffix1="/s"
+                help="Amount of extra Gold per second being used generating eggs"></app-multi-result>
+    <app-multi-result key="New Cost Rate"
+                      [value1]="data.genUpgrade.calc.cost/data.duration.total_seconds()|short2"
+                      iconSuffix1="/assets/gold_small.webp"
+                      suffix1="/s"
+                      help="Amount of total Gold per second being used generating+hatching eggs"></app-multi-result>
+    <app-multi-result key="Extra Total Cost"
+                      prefix1="+ "
+                      [value1]="data.genUpgrade.extra_total_cost()|short"
+                      iconSuffix1="/assets/gold_small.webp"
+                      help="Total amount extra Gold being used during the specified duration generating eggs"></app-multi-result>
+    <app-multi-result key="Recuperate Stones"
+                      [value1]="data.genUpgrade.days_to_recuperate() | number: '1.0-2'"
+                      suffix1=" days"
+                      help="How many days it will take for the extra stones produced to pay off the initial upgrade cost investment."></app-multi-result>
+  </mat-card-content>
+</mat-card>
+
+  <mat-card class="clear-card" *ngIf="data.stats.is_metallic_possible() && (!data.stats.is_max_met_luck() || !data.stats.is_max_met_badge())">
+    <mat-card-title>Metallic Luck</mat-card-title>
+    <mat-card-content>
+      <mat-form-field *ngIf="!data.stats.is_max_met_luck()" subscriptSizing="dynamic" color="accent" appearance="fill">
+        <mat-label>Metallic Luck Increase</mat-label>
+        <mat-select [(value)]="data.metallicUpgrade.increase" (valueChange)="data.metallicUpgrade.recalculate()" class="justify-end">
+          <mat-option *ngFor="let num of data.generate_nums(0, 0.001-data.stats.metallic_luck_pct!, 0.00001, 5)" [value]="num" class="justify-end">
+            + {{num | number: '1.0-5'}}%
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field subscriptSizing="dynamic" color="accent" appearance="fill">
+        <mat-label>Metallic Badge</mat-label>
+        <mat-select [(value)]="data.metallicUpgrade.increase2" (valueChange)="data.metallicUpgrade.recalculate()" class="justify-end">
+          <mat-option *ngFor="let num of data.generate_nums(data.stats.metallic_badge_luck!, 2, 0.1, 1)" [value]="num-data.stats.metallic_badge_luck!" class="justify-end">
+            x{{num | number: '1.1-1'}} (+{{num-data.stats.metallic_badge_luck! | number: '1.1-1'}})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br/>
+      <app-multi-result *ngIf="!data.stats.is_max_met_luck()"
+                  key="Upgrade Cost"
+                  [value1]="data.metallicUpgrade.cost() | number: '1.0-0'"
+                  [value2]="data.metallicUpgrade.cost() * (data.duration.total_seconds()/data.calc.stones())  / 3600 | number: '1.0-2'"
+                  suffix2=" hrs"
+                  [smallSuffix2]=true
+                  [parenthesis2]=true
+                  iconSuffix1="/assets/stone.webp"
+                  help="Cost to upgrade the metallic luck by desired amount, and the time required to get them"></app-multi-result>
+      <app-multi-result key="Extra Metallics"
+                        prefix1="+ "
+                        prefix2="+ "
+                        [value1]="data.metallicUpgrade.extra_metallics() | number: '1.0-4'"
+                        iconSuffix1="/assets/chrome.webp"
+                        [parenthesis2]="true"
+                        [value2]="data.metallicUpgrade.extra_metallics_pct() | percent: '1.0-2'"
+                        help="Estimated amount of extra metallics you will receive based on current egg types"></app-multi-result>
+      <app-multi-result *ngIf="data.stats.has_titanium_pets()"
+                        key="Adj Extra Metallics"
+                        prefix1="+ "
+                        prefix2="+ "
+                        [value1]="data.metallicUpgrade.extra_adj_metallics() | number: '1.0-4'"
+                        iconSuffix1="/assets/chrome.webp"
+                        [parenthesis2]="true"
+                        [value2]="data.metallicUpgrade.extra_adj_metallics_pct() | percent: '1.0-2'"
+                        help="Estimated amount of adjusted extra metallics you will receive based on current egg types"></app-multi-result>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="clear-card" *ngIf="data.stats.shiny_wall_luck != null && data.stats.shiny_badge_luck != null && (!data.stats.is_max_shiny() || !data.stats.is_max_shiny_badge())">
+    <mat-card-title>Shiny Luck</mat-card-title>
+    <mat-card-content>
+      <mat-form-field *ngIf="!data.stats.is_max_shiny()" subscriptSizing="dynamic" color="accent" appearance="fill">
+        <mat-label>Shiny Luck Increase</mat-label>
+        <mat-select [(value)]="data.shinyUpgrade.increase" (valueChange)="data.shinyUpgrade.recalculate()" class="justify-end">
+          <mat-option *ngFor="let num of data.generate_nums(0, 2.0-data.stats.shiny_wall_luck!, 0.01, 2)" [value]="num" class="justify-end">
+            + {{num | number: '1.0-2'}}%
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="!data.stats.is_max_shiny_badge()" subscriptSizing="dynamic" color="accent" appearance="fill">
+        <mat-label>Shiny Badge</mat-label>
+        <mat-select [(value)]="data.shinyUpgrade.increase2" (valueChange)="data.shinyUpgrade.recalculate()" class="justify-end">
+          <mat-option *ngFor="let num of data.generate_nums(data.stats.shiny_badge_luck!, 1.10, 0.01, 2)" [value]="num-data.stats.shiny_badge_luck!" class="justify-end">
+            x{{num | number: '1.1-2'}} (+{{num-data.stats.shiny_badge_luck! | number: '1.1-2'}})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br/>
+      <app-multi-result *ngIf="!data.stats.is_max_shiny()"
+                        key="Upgrade Cost"
+                        [value1]="data.shinyUpgrade.cost() | short"
+                        iconSuffix1="/assets/gold.webp"
+                        help="Cost to upgrade the shiny luck by desired amount"></app-multi-result>
+      <app-multi-result key="Extra Shiny Points"
+                        prefix1="+ "
+                        prefix2="+ "
+                        [value1]="data.shinyUpgrade.extra_shiny_points() | number: '1.0-2'"
+                        iconSuffix1="/assets/shiny.webp"
+                        [parenthesis2]="true"
+                        [value2]="data.shinyUpgrade.extra_shiny_points_pct() | percent: '1.0-2'"
+                        help="Estimated amount of extra shiny points you will receive based on current egg types"></app-multi-result>
+      <app-multi-result key="Extra Shiny Skins"
+                        prefix1="+ "
+                        prefix2="+ "
+                        [value1]="data.shinyUpgrade.extra_shiny_skins() | number: '1.0-2'"
+                        iconSuffix1="/assets/shiny.webp"
+                        [parenthesis2]="true"
+                        [value2]="data.shinyUpgrade.extra_shiny_skins_pct() | percent: '1.0-2'"
+                        help="Estimated amount of extra shiny points you will receive based on current egg types"></app-multi-result>
+    </mat-card-content>
+  </mat-card>
+</mat-expansion-panel>

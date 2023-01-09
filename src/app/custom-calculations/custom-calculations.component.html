@@ -1,0 +1,50 @@
+<mat-expansion-panel class="clear-card outer-card">
+  <mat-expansion-panel-header>
+    <mat-panel-title>Custom Calculations</mat-panel-title>
+    <mat-panel-description>Convert between stones and gold</mat-panel-description>
+</mat-expansion-panel-header>
+<div class="inline-flex">
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="custom-convert-field" appearance="fill">
+    <mat-label>Stones</mat-label>
+    <img src="/assets/stone.webp" class="field-icon" alt="">
+    <input matInput class="right-align" type="number" step="1" min="1" max="1000000"
+           [(ngModel)]="stones_to_get">
+  </mat-form-field>
+
+  <app-result key="Stone Cost"
+              [value]="data.calc.cost_per_stone() * stones_to_get | short2"
+              iconSuffix="/assets/gold.webp"
+              [smallIconSuffix]="true"
+              help="How much gold to get the stones"></app-result>
+
+  <app-result key="Time Required"
+              [value]="data.duration.total_seconds()/data.calc.stones() / 3600 * stones_to_get | short"
+              suffix=" hrs"
+              [smallSuffix]=true
+              help="How much time required"></app-result>
+</div>
+<div class="inline-flex">
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="custom-convert-field" appearance="fill">
+    <mat-label>Gold</mat-label>
+    <img src="/assets/gold.webp" class="field-icon" alt="">
+    <input matInput class="right-align" type="number" step="1" min="1" max="100000000000"
+           [(ngModel)]="gold_to_get">
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="gold-level-field" appearance="fill">
+    <mat-select [(value)]="gold_level">
+      <mat-option *ngFor="let level of gold_levels" [value]="level.value">
+        {{level.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-result key="Stone Equivalent"
+              [value]="gold_to_get * gold_level / data.calc.cost_per_stone() | number: '1.0-0'"
+              iconSuffix="/assets/stone.webp"
+              help="Estimated amount of stones you will receive based on current egg types"></app-result>
+</div>
+  <br/>
+  <mat-card-footer>
+    <span><i>Note: These results will vary wildly by the egg type and your current luck values. Change the egg type generated/hatched to see updated results.</i></span>
+  </mat-card-footer>
+</mat-expansion-panel>

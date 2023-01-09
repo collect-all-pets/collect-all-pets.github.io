@@ -1,0 +1,69 @@
+<mat-expansion-panel class="form-card clear-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{title}}</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Egg Luck</mat-label>
+    <!--          <img src="/assets/egg_luck.webp" class="field-icon" alt="">-->
+    <mat-select [(value)]="data.stats.egg_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0, 25, 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}}%
+      </mat-option>
+    </mat-select>
+    <mat-hint>From Rebirth Cave</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Egg Luck Badge</mat-label>
+    <!--          <img src="/assets/egg_luck.webp" class="field-icon" alt="">-->
+    <mat-select [(value)]="data.stats.egg_badge_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0, 10, 1, 0)" [value]="num" class="justify-end">
+        +{{num | number: '1.0-0'}}%
+      </mat-option>
+    </mat-select>
+    <mat-hint>Badge for rebirths</mat-hint>
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Fuse Luck</mat-label>
+    <mat-select [(value)]="data.stats.fuse_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0, 25, 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}}%
+      </mat-option>
+    </mat-select>
+    <mat-hint>From Rebirth Cave</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="calcifyLuck" subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+    <mat-label>Calcify Luck</mat-label>
+    <mat-select [(value)]="data.stats.calcify_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+      <mat-option *ngFor="let num of data.generate_nums(0, 100, 1, 0)" [value]="num" class="justify-end">
+        {{num | number: '1.0-0'}}%
+      </mat-option>
+    </mat-select>
+    <mat-hint>Automation Area</mat-hint>
+  </mat-form-field>
+
+  <br/>
+
+  <app-checkbox *ngIf="cheaperEggs"
+                class="cb-left"
+                label="Cheaper Eggs"
+                shortHelp="Have you unlocked Cheaper Eggs in the Rebirth Cave?"
+                help="Select this if you have unlocked the Cheaper Eggs upgrade in the rebirth cave. This will affect the gold cost calculations.">
+    <mat-checkbox [(ngModel)]="data.stats.cheaper_eggs" (ngModelChange)="data.update_calc()">
+      Cheaper Eggs
+    </mat-checkbox>
+  </app-checkbox>
+
+  <app-checkbox *ngIf="cheaperEggs && data.stats.cheaper_eggs" class="cb-left"
+                label="Even Cheaper Eggs"
+                shortHelp="Have you unlocked Even Cheaper Eggs in the Rebirth Cave?"
+                help="Select this if you have unlocked the Even Cheaper Eggs upgrade in the rebirth cave. This will affect the gold cost calculations.">
+    <mat-checkbox [(ngModel)]="data.stats.even_cheaper" (ngModelChange)="data.update_calc()">
+      Even Cheaper Eggs
+    </mat-checkbox>
+  </app-checkbox>
+</mat-expansion-panel>

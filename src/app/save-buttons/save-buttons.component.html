@@ -1,0 +1,15 @@
+<mat-card class="outer-card clear-card">
+  <mat-card-content></mat-card-content>
+  <!--  <mat-card-actions>-->
+  <!--    <mat-checkbox [(ngModel)]="data.cfg.auto_save" style="display: inline-flex">-->
+  <!--      Auto Save?-->
+  <!--    </mat-checkbox>-->
+  <!--  </mat-card-actions>-->
+  <mat-card-actions align="end">
+    <button mat-flat-button class="action-button" color="accent" (click)="data.save(); openSnackBar('Saved data to local storage')" [disabled]="data.cfg.auto_save">Save</button>
+    <button mat-flat-button class="action-button" color="primary" (click)="data.restore(); openSnackBar('Restored data to local storage')" [disabled]="data.cfg.auto_save">Restore</button>
+    <!--    <button mat-flat-button class="action-button" (click)="data.import()">Import</button>-->
+    <!--    <button mat-flat-button class="action-button" (click)="data.export()">Export</button>-->
+    <button mat-flat-button class="action-button" color="warn" (click)="data.reset(); openSnackBar('Reset data to defaults')">Reset</button>
+  </mat-card-actions>
+</mat-card>

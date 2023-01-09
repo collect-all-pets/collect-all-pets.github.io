@@ -1,0 +1,31 @@
+<div class="inline-flex">
+<mat-accordion class="user-stats-accordian" multi>
+  <app-egg-luck></app-egg-luck>
+  <app-shiny-luck></app-shiny-luck>
+  <app-metallic-luck></app-metallic-luck>
+  <app-titanium-count *ngIf="data.stats.is_metallic_possible()"></app-titanium-count>
+  <app-generation></app-generation>
+  <app-auto-hatch></app-auto-hatch>
+
+  <app-duration></app-duration>
+  <app-save-buttons></app-save-buttons>
+</mat-accordion>
+</div>
+
+<div class="inline-flex">
+<mat-accordion class="results-accordian" multi>
+  <app-results-info *ngIf="data.hatch_info.is_enabled(data.stats)"></app-results-info>
+  <app-metallic-charts *ngIf="data.stats.is_metallic_possible() && data.hatch_info.is_enabled(data.stats)"></app-metallic-charts>
+  <app-egg-breakdown *ngIf="data.hatch_info.is_enabled(data.stats)"></app-egg-breakdown>
+  <app-metallic-chances *ngIf="data.stats.is_metallic_possible() && data.hatch_info.is_enabled(data.stats) && data.duration.total_days() <= 3"></app-metallic-chances>
+  <app-next-upgrades *ngIf="data.stats.can_upgrade()"></app-next-upgrades>
+  <app-custom-calculations *ngIf="data.hatch_info.is_enabled(data.stats)"></app-custom-calculations>
+  <app-what-ifs *ngIf="data.stats.can_upgrade()"></app-what-ifs>
+</mat-accordion>
+</div>
+
+<div class="inline-flex">
+  <mat-accordion class="metallic-optimizer-accordian" multi>
+    <app-metallic-optimizers *ngIf="data.stats.is_metallic_possible() && data.hatch_info.is_enabled(data.stats)"></app-metallic-optimizers>
+  </mat-accordion>
+</div>

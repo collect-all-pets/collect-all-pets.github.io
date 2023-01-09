@@ -1,0 +1,30 @@
+.navbar-header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 4px 16px;
+}
+
+.navbar-header-item-selected {
+  background: rgba(0, 0, 0, .2);
+}
+
+.app-toolbar {
+  background-color: #444444;
+}
+
+.mat-mdc-button {
+  color: #fff !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  height: 56px;
+}
+
+.menu-button {
+  margin-top: 10px;
+}

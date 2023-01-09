@@ -1,0 +1,80 @@
+.left-image {
+  width: 40px;
+  padding: 10px 5px 10px 5px;
+  height: 30px;
+  display: inline;
+  float: left;
+  background: #444444;
+}
+
+.right-content {
+  width: 130px;
+  padding: 10px;
+  height: 30px;
+  display: inline;
+  background: #555555;
+  float: right;
+}
+
+.result-footer {
+  margin-left: 50px;
+  margin-top: -20px;
+}
+
+.icon-card-content {
+  padding: 0;
+  margin: 0;
+}
+
+.result {
+  display: inline-flex;
+  text-align: center;
+  /*width: 160px;*/
+  /*width: 240px;*/
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.result-header {
+  padding-top: 5px;
+  display: inline;
+  cursor: pointer;
+}
+
+.result-value {
+  text-align: center;
+  cursor: pointer;
+}
+
+.result-value-text {
+  margin-top: -10px;
+}
+
+.result-key {
+  text-align: center;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+mat-card {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.result-prefix {
+
+}
+
+.result-suffix {
+  /*font-size: medium;*/
+  /*margin-left: 2px;*/
+}
+
+.result-suffix-small {
+  font-size: medium;
+  /*margin-left: 0px;*/
+}
+
+.mat-mdc-card-content:first-child {
+  padding-top: 0 !important;
+}

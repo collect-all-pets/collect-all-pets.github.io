@@ -1,0 +1,32 @@
+<mat-expansion-panel class="form-card clear-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Metallic Luck</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <app-form-field label="Metallic Luck"
+                  help="<p>Enter the exact value you see in the Grove for your metallic luck percent. If you have not unlocked the Grove, then this is 0. The first upgrade is 0.00001% (1 in 10mil) and the highest value is 0.001% (1 in 100k) base.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Metallic Luck</mat-label>
+      <mat-select [(value)]="data.stats.metallic_luck_pct" (valueChange)="data.update_calc()" class="justify-end">
+        <mat-option *ngFor="let num of data.generate_nums(0, 0.001, 0.00001, 5)" [value]="num" class="justify-end">
+          {{num | number: '1.0-5'}}%
+        </mat-option>
+      </mat-select>
+      <mat-hint>Found in Grove</mat-hint>
+    </mat-form-field>
+  </app-form-field>
+
+  <app-form-field label="Metallic Badge Luck"
+                  help="<p>Your current Metallic Luck multiplier based on your Metallic Badges. If you have no metallic pets yet, this value is 1.0. The maximum value is 2.0 if you have all 10 badges.</p>">
+    <mat-form-field subscriptSizing="dynamic" color="accent" class="regular-field" appearance="fill">
+      <mat-label>Metallic Badge Luck</mat-label>
+      <mat-select [(value)]="data.stats.metallic_badge_luck" (valueChange)="data.update_calc()">
+        <mat-option *ngFor="let num of data.generate_nums(1, 2, 0.1, 1)" [value]="num">
+          x{{num | number: '1.0-1'}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Achievement</mat-hint>
+    </mat-form-field>
+  </app-form-field>
+
+</mat-expansion-panel>

@@ -1,0 +1,32 @@
+<mat-expansion-panel class="clear-card outer-card" expanded>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Metallic Chances</mat-panel-title>
+    <mat-panel-description>Statistical Distribution</mat-panel-description>
+  </mat-expansion-panel-header>
+<!--  <div style="display: flex; justify-content: center;">-->
+<!--    <div>-->
+<!--      <table mat-table [dataSource]="data.calc.metallic_binomial_distribution()" class="mat-elevation-z8">-->
+<!--        <ng-container matColumnDef="exactly">-->
+<!--          <th mat-header-cell *matHeaderCellDef style="text-align: right"> Exactly </th>-->
+<!--          <td mat-cell style="text-align: right"-->
+<!--              *matCellDef="let element"> {{element.exactly | percent: '1.2-2'}}-->
+<!--          </td>-->
+<!--        </ng-container>-->
+<!--        <ng-container matColumnDef="at-least">-->
+<!--          <th mat-header-cell *matHeaderCellDef style="text-align: right"> At Least </th>-->
+<!--          <td mat-cell style="text-align: right"-->
+<!--              *matCellDef="let element"> {{element.at_least | percent: '1.2-2'}}-->
+<!--          </td>-->
+<!--        </ng-container>-->
+<!--        <ng-container matColumnDef="metallics">-->
+<!--          <th mat-header-cell *matHeaderCellDef style="text-align: right"> Metallic Count </th>-->
+<!--          <td mat-cell style="text-align: right"-->
+<!--              *matCellDef="let element"><mat-chip>{{element.successes | number: '1.0-0'}}</mat-chip> </td>-->
+<!--        </ng-container>-->
+<!--        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+  <canvas #chart width="505" height="300"></canvas>
+</mat-expansion-panel>
